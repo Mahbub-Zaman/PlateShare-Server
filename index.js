@@ -84,26 +84,26 @@ async function run() {
 
 
         app.patch('/foods/:id', async (req, res) => {
-  const id = req.params.id;
-  const updates = req.body;
-  const query = { _id: new ObjectId(id) };
+            const id = req.params.id;
+            const updates = req.body;
+            const query = { _id: new ObjectId(id) };
 
-  const updatedFields = {};
+            const updatedFields = {};
 
-  // Only update the fields that are actually provided
-  if (updates.food_name !== undefined) updatedFields.food_name = updates.food_name;
-  if (updates.food_image !== undefined) updatedFields.food_image = updates.food_image;
-  if (updates.food_quantity !== undefined) updatedFields.food_quantity = updates.food_quantity;
-  if (updates.pickup_location !== undefined) updatedFields.pickup_location = updates.pickup_location;
-  if (updates.expire_date !== undefined) updatedFields.expire_date = updates.expire_date;
-  if (updates.additional_notes !== undefined) updatedFields.additional_notes = updates.additional_notes;
-  if (updates.food_status !== undefined) updatedFields.food_status = updates.food_status;
+            // Only update the fields that are actually provided
+            if (updates.food_name !== undefined) updatedFields.food_name = updates.food_name;
+            if (updates.food_image !== undefined) updatedFields.food_image = updates.food_image;
+            if (updates.food_quantity !== undefined) updatedFields.food_quantity = updates.food_quantity;
+            if (updates.pickup_location !== undefined) updatedFields.pickup_location = updates.pickup_location;
+            if (updates.expire_date !== undefined) updatedFields.expire_date = updates.expire_date;
+            if (updates.additional_notes !== undefined) updatedFields.additional_notes = updates.additional_notes;
+            if (updates.food_status !== undefined) updatedFields.food_status = updates.food_status;
 
-  const update = { $set: updatedFields };
+            const update = { $set: updatedFields };
 
-  const result = await foodsCollection.updateOne(query, update);
-  res.send(result);
-});
+            const result = await foodsCollection.updateOne(query, update);
+            res.send(result);
+        });
 
 
         app.delete('/foods/:id', async (req, res) => {
