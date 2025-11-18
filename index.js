@@ -60,7 +60,7 @@ async function run() {
         app.get('/featured-foods', async (req, res) => {
         const foods = await foodsCollection.find().toArray();
 
-        foods.sort((a, b) => {
+            foods.sort((a, b) => {
             const aNum = parseInt(a.food_quantity.match(/\d+/)[0]);
             const bNum = parseInt(b.food_quantity.match(/\d+/)[0]);
             return bNum - aNum;
