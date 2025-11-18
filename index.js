@@ -114,26 +114,26 @@ async function run() {
         })
 
         // Update request: status + action + any other fields
-app.patch("/foodRequests/:id", async (req, res) => {
-    try {
-        const { id } = req.params;
-        const updateData = req.body;
+        app.patch("/foodRequests/:id", async (req, res) => {
+            try {
+                const { id } = req.params;
+                const updateData = req.body;
 
-        const allowedUpdates = {};
-        if (updateData.status !== undefined) allowedUpdates.status = updateData.status;
-        if (updateData.action !== undefined) allowedUpdates.action = updateData.action;
+                const allowedUpdates = {};
+                if (updateData.status !== undefined) allowedUpdates.status = updateData.status;
+                if (updateData.action !== undefined) allowedUpdates.action = updateData.action;
 
-        const result = await foodRequestsCollection.updateOne(
-            { _id: new ObjectId(id) },
-            { $set: allowedUpdates }
-        );
+                const result = await foodRequestsCollection.updateOne(
+                    { _id: new ObjectId(id) },
+                    { $set: allowedUpdates }
+                );
 
-        res.send(result);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "Failed to update request" });
-    }
-});
+                res.send(result);
+            } catch (err) {
+                console.error(err);
+                res.status(500).json({ error: "Failed to update request" });
+            }
+        });
 
 
 // Get all requests for foods donated by logged-in user
