@@ -5,19 +5,19 @@ const app = express();
 require('dotenv').config();
 const port = process.env.PORT || 3000;
 
-// middleware
-app.use(cors());
-app.use(express.json());
+    // middleware
+    app.use(cors());
+    app.use(express.json());
 
-const uri = `mongodb+srv://${process.env.SECRET_KEY}:${process.env.SECRET_HASH}@cluster0.5grmxkk.mongodb.net/?appName=Cluster0`;
+    const uri = `mongodb+srv://${process.env.SECRET_KEY}:${process.env.SECRET_HASH}@cluster0.5grmxkk.mongodb.net/?appName=Cluster0`;
 
-const client = new MongoClient(uri, {
-    serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-    }
-});
+    const client = new MongoClient(uri, {
+        serverApi: {
+            version: ServerApiVersion.v1,
+            strict: true,
+            deprecationErrors: true,
+        }
+    });
 
 app.get('/', (req, res) => {
     res.send('Smart server is running')
