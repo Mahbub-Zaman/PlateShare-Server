@@ -169,7 +169,6 @@ async function run() {
         });
 
 
-
         //Requester related apis
         // Add food request
         app.post("/foodRequests", async (req, res) => {
@@ -195,8 +194,6 @@ async function run() {
             res.status(500).json({ error: "Failed to fetch food requests" });
         }
         });
-
-
 
         await client.db("admin").command({ ping: 1 });
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
