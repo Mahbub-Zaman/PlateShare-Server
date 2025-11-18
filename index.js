@@ -19,9 +19,9 @@ const port = process.env.PORT || 3000;
         }
     });
 
-app.get('/', (req, res) => {
-    res.send('Smart server is running')
-})
+    app.get('/', (req, res) => {
+        res.send('Smart server is running')
+    })
 
 async function run() {
     try {
