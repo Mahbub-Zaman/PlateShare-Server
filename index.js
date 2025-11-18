@@ -136,37 +136,37 @@ async function run() {
         });
 
 
-// Get all requests for foods donated by logged-in user
-app.get("/myFoodRequests", async (req, res) => {
-    const { userEmail } = req.query; // logged-in user email
-    if (!userEmail) return res.status(400).json({ error: "userEmail is required" });
+        // Get all requests for foods donated by logged-in user
+        app.get("/myFoodRequests", async (req, res) => {
+            const { userEmail } = req.query; // logged-in user email
+            if (!userEmail) return res.status(400).json({ error: "userEmail is required" });
 
-    try {
-        const db = client.db("PlateShare");
-        const foodsCollection = db.collection("foods");
-        const foodRequestsCollection = db.collection("foodRequests");
+            try {
+                const db = client.db("PlateShare");
+                const foodsCollection = db.collection("foods");
+                const foodRequestsCollection = db.collection("foodRequests");
 
-        // 1. Find all foods donated by this user
-        const donatedFoods = await foodsCollection
-            .find({ donator_email: userEmail })
-            .toArray();
+                // 1. Find all foods donated by this user
+                const donatedFoods = await foodsCollection
+                    .find({ donator_email: userEmail })
+                    .toArray();
 
-        if (!donatedFoods.length) {
-            return res.json([]); // No foods donated, return empty array
-        }
+                if (!donatedFoods.length) {
+                    return res.json([]); // No foods donated, return empty array
+                }
 
-        // 2. Get all requests for these food IDs
-        const foodIds = donatedFoods.map(food => food._id.toString()); // convert ObjectId to string
-        const requests = await foodRequestsCollection
-            .find({ foodId: { $in: foodIds } })
-            .toArray();
+                // 2. Get all requests for these food IDs
+                const foodIds = donatedFoods.map(food => food._id.toString()); // convert ObjectId to string
+                const requests = await foodRequestsCollection
+                    .find({ foodId: { $in: foodIds } })
+                    .toArray();
 
-        res.json(requests);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "Failed to fetch requests for your donated foods" });
-    }
-});
+                res.json(requests);
+            } catch (err) {
+                console.error(err);
+                res.status(500).json({ error: "Failed to fetch requests for your donated foods" });
+            }
+        });
 
 
 
